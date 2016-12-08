@@ -51,21 +51,25 @@ class Phash{
     public function getHash($filepath)
     {
         $scale = 8;//todo, allow scale specification
-        try
-        {
-            $img = imagecreatefrompng($filepath);
-        }
-        catch (exception $e)
-        {
-            try
-            {
-                $img = imagecreatefromjpeg($filepath);
-            }
-            catch (exception $f)
-            {
-                return 'Image could not be processed. Only JPG/PNG supported';
-            }
-        }
+		$img = file_get_contents ( $filepath );
+		if (! $img) {
+			return 'failed to load ' . $filepath;
+		}
+		$img = imagecreatefromstring ( $img );
+		if (! $img) {
+			// error, unsupported format.
+			$supportedFormats = '';
+			$needle = 'Support';
+			$needleLen = strlen ( $needle );
+			foreach ( gd_info () as $key => $val ) {
+				if (! $val || strlen ( $key ) <= $needleLen || substr ( $key, - $needleLen ) !== $needle) {
+					continue;
+				}
+				$supportedFormats .= trim ( substr ( $key, 0, strlen ( $key ) - $needleLen ) ) . ', ';
+			}
+			$supportedFormats = rtrim ( $supportedFormats, ', ' );
+			return 'the image format is not supported. supported formats: ' . $supportedFormats;
+		}
         $averageValue = 0;
         for ($y = 0; $y < $scale; $y++)
         {
