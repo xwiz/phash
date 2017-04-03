@@ -52,17 +52,21 @@ class Phash{
     {
         $scale = 8;//todo, allow scale specification
 		$img = file_get_contents ( $filepath );
-		if (! $img) {
+		if (! $img)
+		{
 			return 'failed to load ' . $filepath;
 		}
 		$img = imagecreatefromstring ( $img );
-		if (! $img) {
+		if (! $img)
+		{
 			// error, unsupported format.
 			$supportedFormats = '';
 			$needle = 'Support';
 			$needleLen = strlen ( $needle );
-			foreach ( gd_info () as $key => $val ) {
-				if (! $val || strlen ( $key ) <= $needleLen || substr ( $key, - $needleLen ) !== $needle) {
+			foreach ( gd_info () as $key => $val )
+			{
+				if (! $val || strlen ( $key ) <= $needleLen || substr ( $key, - $needleLen ) !== $needle)
+				{
 					continue;
 				}
 				$supportedFormats .= trim ( substr ( $key, 0, strlen ( $key ) - $needleLen ) ) . ', ';
