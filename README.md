@@ -1,28 +1,24 @@
 Phash
 =====
 
-Perpetual hash implementation for PHP
+Perceptual hash implementation for PHP
 
-This is my PHP Implementation of the simple AverageHash implementation based on Perpetual Hash
+This is my PHP Implementation of the AverageHash algorithm to create Perceptual Hashes
 
-A perpetual hash is different from a typical hash as it allows you to compute a signature based
+A perceptual hash is different from a typical hash as it allows you to compute a signature based
 on the visual features of an image rather than the actual data they contain as with a cryptographic
-hash. This allows you to use the Perpetual Hash for simple image matching which could prove useful
+hash. This allows you to use the Perceptual Hash for simple image matching which could prove useful
 in finding duplicate pictures or picture tagging.
 
 To get a better understanding of this project see: 
 http://www.hackerfactor.com/blog/index.php?/archives/432-Looks-Like-It.html
 
-The methods are quite simple to understand and can be easily implemented on Laravel.
-
 ***
 
-###Sample Usage###
-You can use pHash methods in your class to modify to your specs or as a library
- 
-To use as a library in Laravel, simply copy to your laravel library path and 'dump autoload'
+### Sample Usage ###
+You can use pHash methods as a class in your project and extend as you wish.
 
-After this, you can instantiate and use as follows:
+A basic implementation is as follows:
 
     $hasher = new Phash();
     //initialize input files of both pictures 
@@ -33,3 +29,6 @@ After this, you can instantiate and use as follows:
     $hash2 = $hasher->getHash($second_file);
     //computer similarity
     $similarity = $hasher->getSimilarity($hash1, $hash2); 
+
+## Notes
+We use the bitcount algorithm for matching similarity (calculating the distance between the hashes). This should be siginificantly faster than using hamming distance.
