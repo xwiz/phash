@@ -27,8 +27,9 @@ A basic implementation is as follows:
     //get hash of both files
     $hash1 = $hasher->getHash($input_file);
     $hash2 = $hasher->getHash($second_file);
-    //computer similarity
-    $similarity = $hasher->getSimilarity($hash1, $hash2); 
+    //compute similarity
+    $similarity = $hasher->getSimilarity($hash1, $hash2);
+    echo $similarity;
 
 ## Notes
 We use the bitcount algorithm for matching similarity (calculating the distance between the hashes). This should be siginificantly faster than using hamming distance.
