@@ -20,16 +20,27 @@ You can use pHash methods as a class in your project and extend as you wish.
 
 A basic implementation is as follows:
 
-    $hasher = new Phash();
-    //initialize input files of both pictures 
-    $input_file = '/path/to/mypicture.jpg';
-    $second_file = '/path/to/mysecondpicture.jpg';
-    //get hash of both files
-    $hash1 = $hasher->getHash($input_file);
-    $hash2 = $hasher->getHash($second_file);
-    //compute similarity
-    $similarity = $hasher->getSimilarity($hash1, $hash2);
-    echo $similarity;
+    #sample implementation
+    $phasher = new Phash;
+    $phash2 = $phasher->getHash('phash2.jpg', false);
+    //this will echo hash in hex, then binary
+    echo $phasher->hashAsString($phash2, false).PHP_EOL;
+    echo $phasher->hashAsString($phash2).PHP_EOL;
+
+    $phash3 = $phasher->getHash('phash3.jpg', false);
+    //this will echo hash in hex, then binary
+    echo $phasher->hashAsString($phash3, false).PHP_EOL;
+    echo $phasher->hashAsString($phash3).PHP_EOL;
+
+    //using BIT COUNT METHOD FOR SIMILARITY
+    echo $phasher->getSimilarity($phash2, $phash3, 'BITS');
+    echo PHP_EOL;
+
+    //using HAMMING METHOD (DEFAULT) FOR SIMILARITY
+    echo $phasher->getSimilarity($phash2, $phash3);
+    echo PHP_EOL;
 
 ## Notes
-We use the bitcount algorithm for matching similarity (calculating the distance between the hashes). This should be siginificantly faster than using hamming distance.
+
+ - The bitcount algorithm for matching similarity may be siginificantly faster than hamming distance.
+ - Calculating hamming distance between two hex based hashes may be faster but less accurate than the binary version
