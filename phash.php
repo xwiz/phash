@@ -190,7 +190,7 @@ class Phash{
         $width = imagesx( $img );
         $height = imagesy( $img );
         
-        if($width != $scale || $height !== scale)
+        if($width != $scale || $height != $scale)
         {
             //stretch resize to ensure better/accurate comparison
             $img = $this->makeThumbnail($img, $scale, $scale, $width, $height);            
