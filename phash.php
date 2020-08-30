@@ -134,9 +134,16 @@ class Phash{
     */
     public function makeThumbnail($img, $thumbwidth, $thumbheight, $width, $height)
     {
-        $newheight = $thumbheight;
-        $divisor = $height / $thumbheight;
-        $newwidth = floor( $width / $divisor );
+       if($width >= $height){
+            $newheight = $thumbheight;
+            $divisor = $height / $thumbheight;
+            $newwidth = floor( $width / $divisor );
+        }
+        else{
+            $newwidth = $thumbwidth;
+            $divisor = $width / $thumbwidth;
+            $newheight = floor( $height / $divisor );
+        }
 
         // Create the image in memory.
         $finalimg = imagecreatetruecolor( $newwidth, $newheight );
